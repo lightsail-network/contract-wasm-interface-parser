@@ -10,11 +10,11 @@ __all__ = ["parse_contract_metadata", "ContractMetaData"]
 class ContractMetaData:
     """The contract metadata parsed from the Stellar Contract WASM."""
 
-    env_meta_base64: Optional[bytes] = None
+    env_meta_bytes: Optional[bytes] = None
     env_meta: List[SCEnvMetaEntry] = dataclasses.field(default_factory=list)
-    meta_base64: Optional[bytes] = None
+    meta_bytes: Optional[bytes] = None
     meta: List[SCMetaEntry] = dataclasses.field(default_factory=list)
-    spec_base64: Optional[bytes] = None
+    spec_bytes: Optional[bytes] = None
     spec: List[SCSpecEntry] = dataclasses.field(default_factory=list)
 
 
@@ -31,13 +31,13 @@ def parse_contract_metadata(wasm: Union[bytes, str]) -> ContractMetaData:
     metadata = ContractMetaData()
     for name, content in custom_sections:
         if name == "contractenvmetav0":
-            metadata.env_meta_base64 = content
+            metadata.env_meta_bytes = content
             metadata.env_meta = parse_entries(content, SCEnvMetaEntry)
         if name == "contractspecv0":
-            metadata.spec_base64 = content
+            metadata.spec_bytes = content
             metadata.spec = parse_entries(content, SCSpecEntry)
         if name == "contractmetav0":
-            metadata.meta_base64 = content
+            metadata.meta_bytes = content
             metadata.meta = parse_entries(content, SCMetaEntry)
     return metadata
 

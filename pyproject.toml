@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "contract-wasm-interface-parser"
-version = "0.1.0"
+version = "0.2.0"
 description = "Contract interface metadata parser for binary Stellar WASM"
 authors = ["overcat <4catcode@gmail.com>"]
 license = "Apache License 2.0"
